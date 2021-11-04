@@ -29,6 +29,14 @@ async function run() {
             res.send(services)
         })
 
+        app.get('/services/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) }
+            const services = await serviceCollection.findOne(query);
+            res.send(services)
+            console.log(services);
+        })
+
         app.get('/orders', async (req, res) => {
             const cursor = orderCollection.find({});
             const orders = await cursor.toArray();
